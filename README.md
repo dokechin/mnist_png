@@ -16,4 +16,7 @@ im2rec testing.ctl  ./ testing.rec encoding=.png color=0
 ```
 
 * execute MNIST
-published perl image.pl but test is not passed.
+Execute MNIST program using png record file.
+```sh
+perl image.pl
+```
