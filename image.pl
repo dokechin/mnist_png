@@ -5,11 +5,11 @@ use Data::Dumper;
 use Test::More tests => 1;
 
  my $testing_ite = mx->io->ImageRecordIter(
- {  batch_size => 1, data_shape=> [1,28,28],label_width =>1, path_imgrec => "testing.rec", path_root => '.' });
+ {  batch_size => 100, data_shape=> [1,28,28],label_width =>1, path_imgrec => "testing.rec", path_root => '.' });
 
 
  my $training_ite = mx->io->ImageRecordIter(
- {  batch_size => 1, data_shape=> [1,28,28],label_width =>1, path_imgrec => "training.rec", path_root => '.' });
+ {  batch_size => 100, data_shape=> [1,28,28],label_width =>1, path_imgrec => "training.rec", path_root => '.' , shuffle => 1, shuffle_chunk_size => 1000 });
 
 
 # for my $data (@{$training_ite}){
@@ -44,7 +44,7 @@ my $model = mx->mod->Module(
 $model->fit(
    $training_ite,
    eval_data => $testing_ite,
-   optimizer_params=>{learning_rate=>0.01, momentum=> 0.9},
+   optimizer => 'adam',
    num_epoch=>2
 );
 my $res = $model->score($testing_ite, mx->metric->create('acc'));
