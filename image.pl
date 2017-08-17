@@ -5,11 +5,18 @@ use Data::Dumper;
 use Test::More tests => 1;
 
  my $testing_ite = mx->io->ImageRecordIter(
- {  batch_size => 10, data_shape=> [1,28,28],label_width =>1, path_imgrec => "testing.rec", path_root => '.' });
+ {  batch_size => 1, data_shape=> [1,28,28],label_width =>1, path_imgrec => "testing.rec", path_root => '.' });
 
 
  my $training_ite = mx->io->ImageRecordIter(
- {  batch_size => 10, data_shape=> [1,28,28],label_width =>1, path_imgrec => "training.rec", path_root => '.' });
+ {  batch_size => 1, data_shape=> [1,28,28],label_width =>1, path_imgrec => "training.rec", path_root => '.' });
+
+
+# for my $data (@{$training_ite}){
+#   print Dumper($data);
+#   print $data->data->[0]->aspdl;
+#   print $data->label->[0]->aspdl;
+# }
 
 # Create a place holder variable for the input data
 my $data = mx->symbol->Variable('data');
